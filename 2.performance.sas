@@ -1,0 +1,21 @@
+proc sort data=projectw.loans;
+by e_emp_id;
+run;
+proc sort data=projectw.employee;
+by e_emp_id;
+run;
+data projectw.emp_prfrmnc;
+merge projectw.loans(in=loans) projectw.employee(in=emp);
+by e_emp_id;
+if loans=1 and emp=1;
+if first.e_emp_id then;
+	do;
+		tapplied+applied;
+		tapproved+approved;
+		
+	end;
+if last.e_emp_id;
+perform=tapplied-tapproved;
+run;
+proc print data=projectw.emp_prfrmnc;
+run;

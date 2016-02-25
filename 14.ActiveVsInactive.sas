@@ -1,0 +1,13 @@
+data projectw.active_customers projectw.Inactive_Customers projectw.Dormant_Customers projectw.none;
+set projectw.customer;
+if c_cust_status = "Active" then output projectw.active_customers;
+else if c_cust_status="Inactive" then output projectw.inactive_customers;
+else if c_cust_status = "Dormant" then output projectw.Dormant_customers;
+else output projectw.none;
+run;
+proc print data=projectw.active_Customers;
+run;
+proc print data=projectw.inactive_Customers;
+run;
+proc print data=projectw.dormant_Customers;
+run;
